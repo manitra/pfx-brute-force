@@ -1,9 +1,13 @@
 ﻿using System;
+using System.IO.Compression;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
@@ -39,7 +43,7 @@ namespace WindowsFormsApplication1
                     var start = DateTime.UtcNow;
 
                     Parallel.ForEach(
-                        EnumerateOptions(options, (int)minChar.Value, (int)maxChar.Value),
+                        GetAll(),
                         new ParallelOptions { MaxDegreeOfParallelism = 8 },
                         password =>
                         {
@@ -72,6 +76,36 @@ namespace WindowsFormsApplication1
                     );
                 });
             worker.Start();
+        }
+
+        private IEnumerable<string> GetAll()
+        {
+            return EnumerateDictionary(dictionaryUrl.Text)
+                .Concat(
+                    EnumerateOptions(options, (int)minChar.Value, (int)maxChar.Value)
+                );
+        }
+
+        private IEnumerable<string> EnumerateDictionary(string url)
+        {
+            using (var reader = 
+                new StreamReader(
+                    new GZipStream(
+                        WebRequest.Create(url)
+                            .GetResponse()
+                            .GetResponseStream(), 
+                        CompressionMode.Decompress
+                    )
+                )
+            )
+            {
+                string row;
+                while((row = reader.ReadLine()) != null)
+                {
+                    yield return row;                    
+                }
+                
+            }
         }
 
         private IEnumerable<string> EnumerateOptions(IList<char> options, int minLength, int maxLength)
