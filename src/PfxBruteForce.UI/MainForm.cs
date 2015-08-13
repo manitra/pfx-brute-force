@@ -20,6 +20,7 @@ namespace WindowsFormsApplication1
     {
         private IList<char> options;
         private Thread worker;
+        private bool running = false;
 
         public MainForm()
         {
@@ -34,48 +35,96 @@ namespace WindowsFormsApplication1
             //    options.Add(i);
         }
 
-        private void go_Click(object sender, EventArgs e)
+        protected override void OnClosing(CancelEventArgs e)
         {
-            worker = new Thread(() =>
+            base.OnClosing(e);
+            
+            //we just cancel the initial running request
+            //set the cooperative running flag so that workers stop their job
+            //schedule a real running in few moment
+            if (running)
+            {
+                running = false;
+                e.Cancel = true;
+                Task.Factory.FromAsync(
+                    Task.Delay(500),
+                    r => BeginInvoke(new Action(Close))
+                );
+            }
+        }
+
+        private async void go_Click(object sender, EventArgs e)
+        {
+            running = !running;
+            go.Text = running ? "Stop" : "Go";
+            if (!running) return;
+
+            var start = DateTime.UtcNow;
+            long count = 0;
+            var speedCalculationStartDate = start;
+            var speedCalculationCount = 0;
+
+            var cancelHandle = new CancellationTokenSource();
+            var options = new ParallelOptions
                 {
+                    MaxDegreeOfParallelism = System.Environment.ProcessorCount,
+                    CancellationToken = cancelHandle.Token
+                };
 
-                    long count = 0;
-                    var start = DateTime.UtcNow;
-
-                    Parallel.ForEach(
-                        GetAll(),
-                        new ParallelOptions { MaxDegreeOfParallelism = 8 },
-                        password =>
+            try
+            {
+                Parallel.ForEach(
+                    GetAll(),
+                    options,
+                    password =>
+                    {
+                        if (count % 10 == 0)
                         {
-                            if (count % 10 == 0)
-                            {
+                            if (running)
                                 Invoke(new Action(() =>
-                                {
-                                    toolStripStatusLabel1.Text = "Trying " + password;
-                                    var elapsed = DateTime.UtcNow - start;
-                                    toolStripStatusLabel2.Text = string.Format(
-                                        "{0:n} tests per seconds since {1:t}",
-                                        count / elapsed.TotalSeconds, elapsed
-                                    );
-                                }));
-                                Application.DoEvents();
-                            }
-
-                            if (TryPassword(password))
-                            {
-                                BeginInvoke(new Action(() =>
-                                {
-                                    MessageBox.Show("Found : " + password);
-                                    label2.Text = password;
-
-                                }));
-                            }
-
-                            count++;
+                                    {
+                                        var now = DateTime.UtcNow;
+                                        currentCheckLabel.Text = password;
+                                        current.Text = password;
+                                        elapsedDurationLabel.Text = (now - start).ToString("mm':'ss");
+                                        checksPerSecondsLabel.Text =
+                                            (speedCalculationCount /
+                                             (now - speedCalculationStartDate).TotalSeconds).ToString("n");
+                                        speedCalculationStartDate = now;
+                                        speedCalculationCount = 0;
+                                    }));
+                            Application.DoEvents();
                         }
+
+                        if (TryPassword(password))
+                        {
+                            if (running)
+                                BeginInvoke(new Action(() =>
+                                    {
+                                        MessageBox.Show("Found : " + password);
+                                        current.Text = password;
+
+                                    }));
+                        }
+
+                        count++;
+                        speedCalculationCount++;
+
+                        if (!running)
+                        {
+                            options.CancellationToken.ThrowIfCancellationRequested();
+                        }
+                    }
                     );
-                });
-            worker.Start();
+            }
+            catch (OperationCanceledException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                cancelHandle.Dispose();
+            }
         }
 
         private IEnumerable<string> GetAll()
@@ -88,23 +137,23 @@ namespace WindowsFormsApplication1
 
         private IEnumerable<string> EnumerateDictionary(string url)
         {
-            using (var reader = 
+            using (var reader =
                 new StreamReader(
                     new GZipStream(
                         WebRequest.Create(url)
                             .GetResponse()
-                            .GetResponseStream(), 
+                            .GetResponseStream(),
                         CompressionMode.Decompress
                     )
                 )
             )
             {
                 string row;
-                while((row = reader.ReadLine()) != null)
+                while ((row = reader.ReadLine()) != null)
                 {
-                    yield return row;                    
+                    yield return row;
                 }
-                
+
             }
         }
 
