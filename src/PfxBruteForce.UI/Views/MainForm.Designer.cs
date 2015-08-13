@@ -49,6 +49,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.selectFile = new System.Windows.Forms.Button();
             this.uiRefreshTimer = new System.Windows.Forms.Timer(this.components);
+            this.worker = new System.ComponentModel.BackgroundWorker();
             this.footer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minChar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxChar)).BeginInit();
@@ -249,8 +250,11 @@
             // 
             // uiRefreshTimer
             // 
-            this.uiRefreshTimer.Interval = 500;
             this.uiRefreshTimer.Tick += new System.EventHandler(this.uiRefreshTimer_Tick);
+            // 
+            // worker
+            // 
+            this.worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.worker_DoWork);
             // 
             // MainForm
             // 
@@ -302,6 +306,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button selectFile;
         private System.Windows.Forms.Timer uiRefreshTimer;
+        private System.ComponentModel.BackgroundWorker worker;
     }
 }
 

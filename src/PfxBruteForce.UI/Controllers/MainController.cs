@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PfxBruteForce.UI.Controllers.ViewModels;
@@ -7,7 +8,7 @@ namespace PfxBruteForce.UI.Controllers
 {
     public class MainController
     {
-        int bucketSize = 100;
+        int bucketSize = 10;
 
         private MainFormViewModel model;
         private CompositeGenerator generator;
@@ -72,6 +73,7 @@ namespace PfxBruteForce.UI.Controllers
 
                 model.Speed = speedCalc.Speed;
                 model.Elapsed = speedCalc.Elapsed;
+                model.CurrentPassword = passwords.FirstOrDefault();
             } while (model.Running);
         }
 

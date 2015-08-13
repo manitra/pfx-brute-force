@@ -23,8 +23,10 @@ namespace PfxBruteForce.UI.Controllers
             return this;
         }
 
-        public Task<ICollection<string>> GetBucket(int size)
+        public async Task<ICollection<string>> GetBucket(int size)
         {
+            await Task.Yield();
+
             var result = new List<string>(size);
             while (number.Count <= maxLength && result.Count < size)
             {
@@ -47,7 +49,7 @@ namespace PfxBruteForce.UI.Controllers
                     number.Insert(0, 0);
             }
 
-            return Task.FromResult<ICollection<string>>(result);
+            return result;
         }
 
         private string Stringify(IEnumerable<int> number, IList<char> options)

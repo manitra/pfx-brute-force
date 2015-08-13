@@ -30,9 +30,6 @@ namespace PfxBruteForce.UI.Views
             base.OnLoad(e);
 
             model = controller.Init();
-
-            uiRefreshTimer.Interval = (int)TimeSpan.FromSeconds(0.5).TotalMilliseconds;
-            uiRefreshTimer.Enabled = true;
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -56,18 +53,15 @@ namespace PfxBruteForce.UI.Views
         private async void go_Click(object sender, EventArgs e)
         {
             if (model.Running)
+            {
                 controller.Stop();
+                uiRefreshTimer.Stop();
+            }
             else
-                await controller.Start(
-                    new MainFormStartParameter
-                    {
-                        DictionaryUrl = dictionaryUrl.Text,
-                        MaxLength = (int)maxChar.Value,
-                        MinLength = (int)maxChar.Value,
-                        TargetPath = certificatePath.Text
-                    }
-                );
-            UpdateUI();
+            {
+                worker.RunWorkerAsync();
+                uiRefreshTimer.Start();
+            }
         }
 
         private void UpdateUI()
@@ -87,6 +81,19 @@ namespace PfxBruteForce.UI.Views
         private void uiRefreshTimer_Tick(object sender, EventArgs e)
         {
             UpdateUI();
+        }
+
+        private void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            controller.Start(
+                new MainFormStartParameter
+                {
+                    DictionaryUrl = dictionaryUrl.Text,
+                    MaxLength = (int)maxChar.Value,
+                    MinLength = (int)maxChar.Value,
+                    TargetPath = certificatePath.Text
+                }
+            );
         }
     }
 }
