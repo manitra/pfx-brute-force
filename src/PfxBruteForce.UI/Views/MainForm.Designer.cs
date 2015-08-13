@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.certificatePath = new System.Windows.Forms.TextBox();
             this.go = new System.Windows.Forms.Button();
             this.footer = new System.Windows.Forms.StatusStrip();
@@ -47,6 +48,7 @@
             this.dictionaryUrl = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.selectFile = new System.Windows.Forms.Button();
+            this.uiRefreshTimer = new System.Windows.Forms.Timer(this.components);
             this.footer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minChar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxChar)).BeginInit();
@@ -245,6 +247,11 @@
             this.selectFile.UseVisualStyleBackColor = true;
             this.selectFile.Click += new System.EventHandler(this.go_Click);
             // 
+            // uiRefreshTimer
+            // 
+            this.uiRefreshTimer.Interval = 500;
+            this.uiRefreshTimer.Tick += new System.EventHandler(this.uiRefreshTimer_Tick);
+            // 
             // MainForm
             // 
             this.AcceptButton = this.go;
@@ -294,6 +301,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button selectFile;
+        private System.Windows.Forms.Timer uiRefreshTimer;
     }
 }
 
