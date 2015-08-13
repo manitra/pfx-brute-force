@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace PfxBruteForce.UI.Views
 {
     partial class MainForm
     {
