@@ -41,6 +41,7 @@ namespace PfxBruteForce.UI.Controllers
 
             model.Running = true;
             model.GoText = "Stop";
+            model.StatusText = "Running ..";
             model.Found = false;
             model.FoundPassword = "";
             model.Elapsed = TimeSpan.Zero;
@@ -85,6 +86,7 @@ namespace PfxBruteForce.UI.Controllers
         {
             model.Running = false;
             model.GoText = "Go";
+            model.StatusText = "Stopped";
         }
     }
 }

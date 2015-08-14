@@ -82,10 +82,10 @@ namespace PfxBruteForce.UI.Views
             {
 
                 go.Text = model.GoText;
-                currentCheckLabel.Text =
+                statusLabel.Text = model.StatusText;
                 current.Text = model.CurrentPassword;
                 elapsedDurationLabel.Text = model.Elapsed.ToString("mm':'ss");
-                checksPerSecondsLabel.Text = model.Speed.ToString("n");
+                checksPerSecondsLabel.Text = model.Speed.ToString("n0");
 
                 if (model.Found)
                 {

@@ -31,8 +31,7 @@
             this.certificatePath = new System.Windows.Forms.TextBox();
             this.go = new System.Windows.Forms.Button();
             this.footer = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.currentCheckLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.checksPerSecondsLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.elapsedDurationLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -82,8 +81,7 @@
             // footer
             // 
             this.footer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.currentCheckLabel,
+            this.statusLabel,
             this.checksPerSecondsLabel,
             this.toolStripStatusLabel3,
             this.elapsedDurationLabel,
@@ -93,19 +91,13 @@
             this.footer.Size = new System.Drawing.Size(853, 22);
             this.footer.TabIndex = 2;
             // 
-            // toolStripStatusLabel1
+            // statusLabel
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(41, 17);
-            this.toolStripStatusLabel1.Text = "Trying";
-            // 
-            // currentCheckLabel
-            // 
-            this.currentCheckLabel.AutoSize = false;
-            this.currentCheckLabel.Name = "currentCheckLabel";
-            this.currentCheckLabel.Size = new System.Drawing.Size(140, 17);
-            this.currentCheckLabel.Text = "Waiting";
-            this.currentCheckLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.statusLabel.AutoSize = false;
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(140, 17);
+            this.statusLabel.Text = "Waiting";
+            this.statusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // checksPerSecondsLabel
             // 
@@ -292,7 +284,7 @@
         private System.Windows.Forms.TextBox certificatePath;
         private System.Windows.Forms.Button go;
         private System.Windows.Forms.StatusStrip footer;
-        private System.Windows.Forms.ToolStripStatusLabel currentCheckLabel;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabel;
         private System.Windows.Forms.Label current;
         private System.Windows.Forms.ToolStripStatusLabel checksPerSecondsLabel;
         private System.Windows.Forms.NumericUpDown minChar;
@@ -305,7 +297,6 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel elapsedDurationLabel;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.OpenFileDialog openFile;
         private System.Windows.Forms.Button selectFile;
         private System.ComponentModel.BackgroundWorker worker;
