@@ -48,30 +48,32 @@
             this.openFile = new System.Windows.Forms.OpenFileDialog();
             this.selectFile = new System.Windows.Forms.Button();
             this.worker = new System.ComponentModel.BackgroundWorker();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.footer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minChar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxChar)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // certificatePath
             // 
             this.certificatePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.certificatePath.Location = new System.Drawing.Point(12, 12);
+            this.certificatePath.Location = new System.Drawing.Point(3, 3);
             this.certificatePath.Name = "certificatePath";
             this.certificatePath.ReadOnly = true;
-            this.certificatePath.Size = new System.Drawing.Size(666, 20);
+            this.certificatePath.Size = new System.Drawing.Size(766, 20);
             this.certificatePath.TabIndex = 0;
             this.certificatePath.Text = "TestKeys/key-01.p12";
             // 
             // go
             // 
-            this.go.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.go.Location = new System.Drawing.Point(0, 101);
+            this.go.Dock = System.Windows.Forms.DockStyle.Top;
+            this.go.Location = new System.Drawing.Point(0, 88);
             this.go.Name = "go";
-            this.go.Size = new System.Drawing.Size(771, 63);
+            this.go.Size = new System.Drawing.Size(853, 63);
             this.go.TabIndex = 1;
             this.go.Text = "Go";
             this.go.UseVisualStyleBackColor = true;
@@ -86,9 +88,9 @@
             this.toolStripStatusLabel3,
             this.elapsedDurationLabel,
             this.toolStripStatusLabel5});
-            this.footer.Location = new System.Drawing.Point(0, 468);
+            this.footer.Location = new System.Drawing.Point(0, 413);
             this.footer.Name = "footer";
-            this.footer.Size = new System.Drawing.Size(771, 22);
+            this.footer.Size = new System.Drawing.Size(853, 22);
             this.footer.TabIndex = 2;
             // 
             // toolStripStatusLabel1
@@ -135,11 +137,11 @@
             // 
             // current
             // 
-            this.current.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.current.Dock = System.Windows.Forms.DockStyle.Fill;
             this.current.Font = new System.Drawing.Font("Microsoft Sans Serif", 150F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.current.Location = new System.Drawing.Point(0, 164);
+            this.current.Location = new System.Drawing.Point(0, 151);
             this.current.Name = "current";
-            this.current.Size = new System.Drawing.Size(771, 304);
+            this.current.Size = new System.Drawing.Size(853, 262);
             this.current.TabIndex = 3;
             this.current.Text = "xyz";
             this.current.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -192,7 +194,7 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.maxChar);
             this.groupBox1.Controls.Add(this.minChar);
-            this.groupBox1.Location = new System.Drawing.Point(12, 38);
+            this.groupBox1.Location = new System.Drawing.Point(3, 29);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(253, 54);
             this.groupBox1.TabIndex = 5;
@@ -205,9 +207,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.dictionaryUrl);
-            this.groupBox2.Location = new System.Drawing.Point(271, 38);
+            this.groupBox2.Location = new System.Drawing.Point(262, 29);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(488, 54);
+            this.groupBox2.Size = new System.Drawing.Size(588, 54);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Dictionary Based";
@@ -227,14 +229,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dictionaryUrl.Location = new System.Drawing.Point(96, 15);
             this.dictionaryUrl.Name = "dictionaryUrl";
-            this.dictionaryUrl.Size = new System.Drawing.Size(386, 20);
+            this.dictionaryUrl.Size = new System.Drawing.Size(486, 20);
             this.dictionaryUrl.TabIndex = 0;
             this.dictionaryUrl.Text = "http://manitra.net/wp-content/uploads/2015/07/pwd.txt.gz";
             // 
             // selectFile
             // 
             this.selectFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.selectFile.Location = new System.Drawing.Point(684, 9);
+            this.selectFile.Location = new System.Drawing.Point(775, 3);
             this.selectFile.Name = "selectFile";
             this.selectFile.Size = new System.Drawing.Size(75, 23);
             this.selectFile.TabIndex = 1;
@@ -246,19 +248,28 @@
             // 
             this.worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.worker_DoWork);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Controls.Add(this.groupBox2);
+            this.panel1.Controls.Add(this.certificatePath);
+            this.panel1.Controls.Add(this.selectFile);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(853, 88);
+            this.panel1.TabIndex = 7;
+            // 
             // MainForm
             // 
             this.AcceptButton = this.go;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(771, 490);
-            this.Controls.Add(this.go);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(853, 435);
             this.Controls.Add(this.current);
+            this.Controls.Add(this.go);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.footer);
-            this.Controls.Add(this.selectFile);
-            this.Controls.Add(this.certificatePath);
             this.Name = "MainForm";
             this.Text = "Password Cracker";
             this.footer.ResumeLayout(false);
@@ -269,6 +280,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,6 +309,7 @@
         private System.Windows.Forms.OpenFileDialog openFile;
         private System.Windows.Forms.Button selectFile;
         private System.ComponentModel.BackgroundWorker worker;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

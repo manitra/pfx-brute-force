@@ -10,7 +10,7 @@ namespace PfxBruteForce.UI.Controllers
 {
     public class MainController
     {
-        int bucketSize = 3;
+        int bucketSize = 10;
 
         private MainFormViewModel model;
         private CompositeGenerator generator;
