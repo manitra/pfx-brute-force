@@ -22,7 +22,12 @@ namespace PfxBruteForce.UI.Views
         public MainForm()
         {
             InitializeComponent();
-            controller = new MainController();
+        }
+
+        public MainForm(MainController controller)
+            : this()
+        {
+            this.controller = controller;
         }
 
         protected override void OnLoad(EventArgs e)

@@ -8,7 +8,7 @@ namespace PfxBruteForce.UI.Generators
     {
         private ICollection<IPasswordGenerators> children;
 
-        public CompositeGenerator Init(int minLength, int maxLength, string dictionaryUrl)
+        public virtual CompositeGenerator Init(int minLength, int maxLength, string dictionaryUrl)
         {
             this.children = new List<IPasswordGenerators>()
                 {
@@ -19,7 +19,7 @@ namespace PfxBruteForce.UI.Generators
             return this;
         }
 
-        public async Task<ICollection<string>> GetBucket(int size)
+        public virtual async Task<ICollection<string>> GetBucket(int size)
         {
             var child = children.FirstOrDefault();
             if (child == null)

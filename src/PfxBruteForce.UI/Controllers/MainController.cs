@@ -17,12 +17,15 @@ namespace PfxBruteForce.UI.Controllers
         private PasswordTester tester;
         private SpeedCalculator speedCalc;
 
+        public MainController(CompositeGenerator generator, PasswordTester tester, SpeedCalculator speedCalc)
+        {
+            this.generator = generator;
+            this.tester = tester;
+            this.speedCalc = speedCalc;
+        }
+
         public MainFormViewModel Init()
         {
-            generator = new CompositeGenerator();
-            tester = new PasswordTester();
-            speedCalc = new SpeedCalculator();
-
             return model = new MainFormViewModel
                 {
                     CurrentPassword = "",

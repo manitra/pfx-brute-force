@@ -10,12 +10,12 @@ namespace PfxBruteForce.UI.Utils
     {
         private byte[] target;
 
-        public void Init(string targetPath)
+        public virtual void Init(string targetPath)
         {
             target = File.ReadAllBytes(targetPath);
         }
 
-        public async Task<string> Test(ICollection<string> passwords)
+        public virtual async Task<string> Test(ICollection<string> passwords)
         {
             foreach (var password in passwords)
             {

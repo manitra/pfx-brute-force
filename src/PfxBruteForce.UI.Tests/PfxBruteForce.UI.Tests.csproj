@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fakes\BarGenerator.cs" />
+    <Compile Include="Fakes\FooGenerator.cs" />
+    <Compile Include="Fakes\FooTester.cs" />
     <Compile Include="Controllers\MainControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
