@@ -45,13 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\CharCombiner.cs" />
-    <Compile Include="Controllers\CompositeGenerator.cs" />
-    <Compile Include="Controllers\DictionaryReader.cs" />
-    <Compile Include="Controllers\IPasswordGenerators.cs" />
+    <Compile Include="Generators\CharCombiner.cs" />
+    <Compile Include="Generators\CompositeGenerator.cs" />
+    <Compile Include="Generators\DictionaryReader.cs" />
+    <Compile Include="Generators\IPasswordGenerators.cs" />
     <Compile Include="Controllers\MainController.cs" />
-    <Compile Include="Controllers\PasswordTester.cs" />
-    <Compile Include="Controllers\SpeedCalculator.cs" />
+    <Compile Include="Utils\ModelBase.cs" />
+    <Compile Include="Utils\PasswordTester.cs" />
+    <Compile Include="Utils\SpeedCalculator.cs" />
     <Compile Include="Controllers\ViewModels\MainFormStartParameter.cs" />
     <Compile Include="Views\MainForm.cs">
       <SubType>Form</SubType>

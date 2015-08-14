@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PfxBruteForce.UI.Controllers
+namespace PfxBruteForce.UI.Generators
 {
     public interface IPasswordGenerators
     {

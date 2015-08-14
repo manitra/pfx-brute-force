@@ -3,12 +3,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PfxBruteForce.UI.Controllers.ViewModels;
+using PfxBruteForce.UI.Generators;
+using PfxBruteForce.UI.Utils;
 
 namespace PfxBruteForce.UI.Controllers
 {
     public class MainController
     {
-        int bucketSize = 10;
+        int bucketSize = 3;
 
         private MainFormViewModel model;
         private CompositeGenerator generator;
@@ -26,6 +28,7 @@ namespace PfxBruteForce.UI.Controllers
                     CurrentPassword = "",
                     Elapsed = TimeSpan.Zero,
                     Running = false,
+                    GoText = "Go",
                     Found = false,
                     FoundPassword = "",
                     Speed = 0,
@@ -37,6 +40,7 @@ namespace PfxBruteForce.UI.Controllers
             if (model.Running) return;
 
             model.Running = true;
+            model.GoText = "Stop";
             model.Found = false;
             model.FoundPassword = "";
             model.Elapsed = TimeSpan.Zero;
@@ -80,6 +84,7 @@ namespace PfxBruteForce.UI.Controllers
         public void Stop()
         {
             model.Running = false;
+            model.GoText = "Go";
         }
     }
 }

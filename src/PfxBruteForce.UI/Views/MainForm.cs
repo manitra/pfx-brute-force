@@ -30,13 +30,14 @@ namespace PfxBruteForce.UI.Views
             base.OnLoad(e);
 
             model = controller.Init();
+            model.PropertyChanged += model_PropertyChanged;
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
 
-            //we just cancel the initial running request
+            //we just cancel the initial close request
             //set the cooperative running flag so that workers stop their job
             //schedule a real running in few moment
             if (model.Running)
@@ -50,42 +51,21 @@ namespace PfxBruteForce.UI.Views
             }
         }
 
-        private async void go_Click(object sender, EventArgs e)
+        private void go_Click(object sender, EventArgs e)
         {
             if (model.Running)
             {
                 controller.Stop();
-                uiRefreshTimer.Stop();
             }
             else
             {
                 worker.RunWorkerAsync();
-                uiRefreshTimer.Start();
             }
         }
 
-        private void UpdateUI()
+        private async void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            go.Text = model.Running ? "Stop" : "Go";
-            currentCheckLabel.Text =
-            current.Text = model.CurrentPassword;
-            elapsedDurationLabel.Text = model.Elapsed.ToString("mm':'ss");
-            checksPerSecondsLabel.Text = model.Speed.ToString("n");
-
-            if (model.Found)
-            {
-                MessageBox.Show("Found : " + model.FoundPassword);
-            }
-        }
-
-        private void uiRefreshTimer_Tick(object sender, EventArgs e)
-        {
-            UpdateUI();
-        }
-
-        private void worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            controller.Start(
+            await controller.Start(
                 new MainFormStartParameter
                 {
                     DictionaryUrl = dictionaryUrl.Text,
@@ -94,6 +74,32 @@ namespace PfxBruteForce.UI.Views
                     TargetPath = certificatePath.Text
                 }
             );
+        }
+
+        private void model_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            BeginInvoke(new Action(() =>
+            {
+
+                go.Text = model.GoText;
+                currentCheckLabel.Text =
+                current.Text = model.CurrentPassword;
+                elapsedDurationLabel.Text = model.Elapsed.ToString("mm':'ss");
+                checksPerSecondsLabel.Text = model.Speed.ToString("n");
+
+                if (model.Found)
+                {
+                    MessageBox.Show("Found : " + model.FoundPassword);
+                }
+            }));
+        }
+
+        private void selectFile_Click(object sender, EventArgs e)
+        {
+            openFile.InitialDirectory = Path.GetDirectoryName(Path.GetFullPath(certificatePath.Text));
+            openFile.FileName = Path.GetFileName(certificatePath.Text);
+            if (openFile.ShowDialog() == DialogResult.OK)
+                certificatePath.Text = openFile.FileName;
         }
     }
 }

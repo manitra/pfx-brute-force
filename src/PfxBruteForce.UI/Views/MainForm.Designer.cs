@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.certificatePath = new System.Windows.Forms.TextBox();
             this.go = new System.Windows.Forms.Button();
             this.footer = new System.Windows.Forms.StatusStrip();
@@ -46,9 +45,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dictionaryUrl = new System.Windows.Forms.TextBox();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.openFile = new System.Windows.Forms.OpenFileDialog();
             this.selectFile = new System.Windows.Forms.Button();
-            this.uiRefreshTimer = new System.Windows.Forms.Timer(this.components);
             this.worker = new System.ComponentModel.BackgroundWorker();
             this.footer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minChar)).BeginInit();
@@ -233,10 +231,6 @@
             this.dictionaryUrl.TabIndex = 0;
             this.dictionaryUrl.Text = "http://manitra.net/wp-content/uploads/2015/07/pwd.txt.gz";
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
             // selectFile
             // 
             this.selectFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -246,11 +240,7 @@
             this.selectFile.TabIndex = 1;
             this.selectFile.Text = "Select File";
             this.selectFile.UseVisualStyleBackColor = true;
-            this.selectFile.Click += new System.EventHandler(this.go_Click);
-            // 
-            // uiRefreshTimer
-            // 
-            this.uiRefreshTimer.Tick += new System.EventHandler(this.uiRefreshTimer_Tick);
+            this.selectFile.Click += new System.EventHandler(this.selectFile_Click);
             // 
             // worker
             // 
@@ -303,9 +293,8 @@
         private System.Windows.Forms.ToolStripStatusLabel elapsedDurationLabel;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFile;
         private System.Windows.Forms.Button selectFile;
-        private System.Windows.Forms.Timer uiRefreshTimer;
         private System.ComponentModel.BackgroundWorker worker;
     }
 }

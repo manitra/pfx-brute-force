@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PfxBruteForce.UI.Controllers
+namespace PfxBruteForce.UI.Generators
 {
     public class CompositeGenerator : IPasswordGenerators
     {

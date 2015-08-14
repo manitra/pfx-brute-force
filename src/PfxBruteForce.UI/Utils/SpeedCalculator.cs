@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PfxBruteForce.UI.Controllers
+namespace PfxBruteForce.UI.Utils
 {
     public class SpeedCalculator
     {
